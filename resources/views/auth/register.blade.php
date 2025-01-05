@@ -1,17 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('auth.main')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ $title }}</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-
-<body>
-    <div
-        class="flex flex-col items-center justify-center min-h-screen w-full bg-gradient-to-r from-cyan-500 to-blue-500">
+@section('auth')
+    <div class="flex flex-col items-center justify-center min-h-screen w-full bg-gradient-to-r from-cyan-500 to-blue-500">
         @if (session('success'))
             {{ session('success') }}
         @endif
@@ -29,8 +19,8 @@
                 @csrf
                 <div class="flex flex-col mb-3">
                     <label class="mb-1" for="name">Name</label>
-                    <input class="px-2 py-1 rounded-sm border-b border-black focus:outline-none" type="text"
-                        name="name" required>
+                    <input class="px-2 py-1 rounded-sm border-b border-black focus:outline-none" type="text" name="name"
+                        required>
                 </div>
                 <div class="flex flex-col mb-3">
                     <label class="mb-1" for="email">Email</label>
@@ -55,12 +45,10 @@
                 </div>
                 <button type="submit"
                     class="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white hover:bg-blue-600 w-full py-2 rounded-md mt-5 mb-3">Register</button>
-                <p class="text-center text-sm">Already have account? <a href="#"
+                <p class="text-center text-sm">Already have account? <a href="{{ route('login') }}"
                         class="text-blue-700 hover:text-blue-800">Login
                         here</a></p>
             </form>
         </div>
     </div>
-</body>
-
-</html>
+@endsection

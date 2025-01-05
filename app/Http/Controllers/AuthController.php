@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    public function loginView()
+    {
+        $title = "Login";
+        return view('auth.login', compact('title'));
+    }
+
     public function registerView()
     {
         $title = "Register";
