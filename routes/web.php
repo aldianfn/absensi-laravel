@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -8,9 +9,9 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard.dashboard');
-    })->name('dashboard.home');
+    Route::get('/dashboard', [AttendanceController::class, 'index'])->name('dashboard.home');
+
+    Route::get('/attendance', [AttendanceController::class, 'attendance'])->name('dashboard.attendance');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
