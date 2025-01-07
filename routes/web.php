@@ -12,6 +12,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [AttendanceController::class, 'index'])->name('dashboard.home');
 
     Route::get('/attendance', [AttendanceController::class, 'attendance'])->name('dashboard.attendance');
+    Route::post('/attendance', [AttendanceController::class, 'store'])->name('dashboard.attendance.store');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
