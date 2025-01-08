@@ -6,13 +6,17 @@
 
         <div id="clock" name="clock" class="text-xl font-bold my-4"></div>
         
-        <form action="{{ route('dashboard.attendance.store') }}" method="POST">
+        <form action="{{ route('dashboard.attendance.checkIn') }}" method="POST">
             @csrf
             <div class="flex flex-col w-full">
                 <input type="text" name="latitude" id="latitude">
                 <input type="text" name="longitude" id="longitude">
 
-                <button type="submit" id="get-location" class="bg-blue-400 py-2 mt-2 w-32">Get Location</button>
+                <div class="flex gap-4">
+                    <button type="submit" id="get-location" class="{{ $checkedInStatus ? 'bg-gray-200' : 'bg-blue-400' }} py-2 mt-2 w-32" {{ $checkedInStatus ? 'disabled' : '' }}>Check In</button>
+                    {{-- Handle form action --}}
+                    <button type="submit" id="get-location" class="{{ $checkedOutStatus ? 'bg-gray-200' : 'bg-blue-400' }} py-2 mt-2 w-32" {{ $checkedOutStatus ? 'disabled' : '' }}>Check Out</button>
+                </div>
             </div>
         </form>
     {{-- </div> --}}
@@ -48,24 +52,6 @@
                         
                         $('#latitude').val(latitude);
                         $('#longitude').val(longitude);
-                        // $('#check-in').val(formattedTime());
-
-                        // $.ajax({
-                        //     url: '{{ route("dashboard.attendance.store") }}',
-                        //     method: 'POST',
-                        //     data: {
-                        //         _token: '{{ csrf_token() }}',
-                        //         latitude: latitude,
-                        //         longitude: longitude,
-                        //         check_in: formattedTime()
-                        //     },
-                        //     success: function (response) {
-                        //         console.log('Data stored successfully: ', response);
-                        //     },
-                        //     error: function (error) {
-                        //         console.log('Error storing data: ', error);
-                        //     }
-                        // })
                     }, function (error) {
                         console.log('Geo location is not supported');
                     });

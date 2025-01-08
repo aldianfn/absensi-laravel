@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AttendanceController extends Controller
 {
@@ -16,20 +18,38 @@ class AttendanceController extends Controller
     public function attendance()
     {
         $title = "Kehadiran";
+        $user = Auth::user();
 
-        return view('dashboard.attendance.index', compact('title'));
+        $checkedInStatus = Attendance::hasAttendanceToday($user);
+        $checkedOutStatus = Attendance::hasCheckOutToday($user);
+
+        return view('dashboard.attendance.index', compact('title', 'checkedInStatus', 'checkedOutStatus'));
     }
 
-    public function store(Request $request)
+    public function checkInStore(Request $request)
     {
-        $timezone = 'Asia/Jakarta';
+        $user = Auth::user();
         $currentTime = Carbon::now()->toTimeString();
+
         $data = [
             'latitude'  => $request->input('latitude'),
             'longitude' => $request->input('longitude'),
-            'check_in'  => $currentTime
+            'check_in'  => $currentTime,
+            'date'      => today()->toDateString(),
+            'user_id'   => $user->id
         ];
 
-        dd($data);
+        $createCheckIn = Attendance::create($data);
+
+        if ($createCheckIn) {
+            return redirect()->intended(route('dashboard.attendance'));
+        }
+
+        return redirect()->back()->withErrors('Server error');
+    }
+    public function checkOutStore(Request $request)
+    {
+        $user = Auth::user();
+        $currentTime = Carbon::now()->toTimeString();
     }
 }

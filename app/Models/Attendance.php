@@ -6,5 +6,33 @@ use Illuminate\Database\Eloquent\Model;
 
 class Attendance extends Model
 {
-    //
+    protected $fillable = [
+        'date',
+        'check_in',
+        'check_out',
+        'latitude',
+        'longitude',
+        'location',
+        'user_id'
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public static function hasAttendanceToday($user)
+    {
+        return static::where('user_id', $user->id)
+            ->whereDate('date', today())
+            ->exists();
+    }
+
+    public static function hasCheckOutToday($user)
+    {
+        return static::where('user_id', $user->id)
+            ->whereDate('date', today())
+            ->whereNotNull('check_out')
+            ->exists();
+    }
 }
