@@ -17,11 +17,11 @@
                 @csrf
                 <div class="flex flex-col mb-3">
                     <label class="mb-1" for="email">Email</label>
-                    <input class="px-2 py-1 rounded-sm border-b border-black focus:outline-none" type="email" name="email" required>
+                    <input class="px-2 py-1 rounded-sm border-b border-black focus:outline-none" type="email" name="email" id="email" required>
                 </div>
                 <div class="flex flex-col mb-3">
                     <label class="mb-1" for="password">Password</label>
-                    <input class="px-2 py-1 rounded-sm border-b border-black focus:outline-none" type="password" name="password" required>
+                    <input class="px-2 py-1 rounded-sm border-b border-black focus:outline-none" type="password" name="password" id="password" required>
                 </div>
                 <button type="submit" class="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white hover:bg-blue-600 w-full py-2 rounded-md mt-5 mb-3">Login</button>
                 <p class="text-center text-sm">Don't have account? <a href="{{ route('register') }}" class="text-blue-700 hover:text-blue-800">Register here</a></p>
