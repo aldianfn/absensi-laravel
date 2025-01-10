@@ -13,7 +13,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/attendance', [AttendanceController::class, 'attendance'])->name('dashboard.attendance');
     Route::post('/attendance', [AttendanceController::class, 'checkInStore'])->name('dashboard.attendance.checkIn');
-    Route::put('/attendance', [AttendanceController::class, 'checkOutStore'])->name('dashboard.attendance.checkOut');
+    Route::post('/attendance/check-out', [AttendanceController::class, 'checkOutStore'])->name('dashboard.attendance.checkOut');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

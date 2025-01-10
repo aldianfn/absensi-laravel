@@ -50,6 +50,12 @@ class AttendanceController extends Controller
     public function checkOutStore(Request $request)
     {
         $user = Auth::user();
+        $attendance = Attendance::hasCheckedInToday($user);
         $currentTime = Carbon::now()->toTimeString();
+
+        $attendance->check_out = $currentTime;
+        $attendance->save();
+
+        return redirect()->intended(route('dashboard.attendance'));
     }
 }

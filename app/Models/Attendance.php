@@ -28,6 +28,14 @@ class Attendance extends Model
             ->exists();
     }
 
+    public static function hasCheckedInToday($user)
+    {
+        return static::where('user_id', $user->id)
+            ->whereDate('date', today())
+            ->whereNull('check_out')
+            ->first();
+    }
+
     public static function hasCheckOutToday($user)
     {
         return static::where('user_id', $user->id)
