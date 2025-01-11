@@ -53,9 +53,14 @@ class AttendanceController extends Controller
         $attendance = Attendance::hasCheckedInToday($user);
         $currentTime = Carbon::now()->toTimeString();
 
-        $attendance->check_out = $currentTime;
-        $attendance->save();
+        if ($attendance) {
+            $attendance->update([
+                'check_out' => $currentTime
+            ]);
 
-        return redirect()->intended(route('dashboard.attendance'));
+            return redirect()->intended(route('dashboard.attendance'));
+        }
+
+        return redirect()->back();
     }
 }
