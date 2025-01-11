@@ -9,5 +9,4 @@
         <button type="submit" class="bg-blue-400">Logout</button>
     </form>
 </div>
-<a href="{{ route('dashboard.attendance') }}">Kehadiran</a>
 @endsection
