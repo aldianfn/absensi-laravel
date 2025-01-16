@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('latitude');
             $table->string('longitude');
             $table->string('location')->nullable();
+            $table->string('photo');
+            $table->string('photo_path');
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
         });

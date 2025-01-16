@@ -20,10 +20,13 @@ class AttendanceController extends Controller
         $title = "Attendance";
         $user = Auth::user();
 
+        $attendanceLists = Attendance::where('user_id', $user->id)->get();
+        // dd($attendanceLists);
+
         $checkedInStatus = Attendance::hasAttendanceToday($user);
         $checkedOutStatus = Attendance::hasCheckOutToday($user);
 
-        return view('dashboard.attendance.index', compact('title', 'checkedInStatus', 'checkedOutStatus'));
+        return view('dashboard.attendance.index', compact('title', 'checkedInStatus', 'checkedOutStatus', 'attendanceLists'));
     }
 
     public function checkInStore(Request $request)
@@ -31,12 +34,21 @@ class AttendanceController extends Controller
         $user = Auth::user();
         $currentTime = Carbon::now()->toTimeString();
 
+        // $request->validate([
+        //     'latitiude'     => 'required|string|max:255',
+        //     'longitude'     => 'required|string|max:255',
+        //     'check_in'      => 'required|time',  // time?
+        //     'date'          => 'required|date',  // date?
+        //     'photo'         => 'required|image|mimes:jpeg,jpg|max:2048',
+        //     'photo_path'    => 'required|string|max:255'
+        // ]);
+
         $data = [
             'latitude'  => $request->input('latitude'),
             'longitude' => $request->input('longitude'),
             'check_in'  => $currentTime,
             'date'      => today()->toDateString(),
-            'user_id'   => $user->id
+            'user_id'   => $user->id,
         ];
 
         $createCheckIn = Attendance::create($data);
