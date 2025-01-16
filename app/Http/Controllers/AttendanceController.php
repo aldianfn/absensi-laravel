@@ -17,7 +17,7 @@ class AttendanceController extends Controller
 
     public function attendance()
     {
-        $title = "Kehadiran";
+        $title = "Attendance";
         $user = Auth::user();
 
         $checkedInStatus = Attendance::hasAttendanceToday($user);

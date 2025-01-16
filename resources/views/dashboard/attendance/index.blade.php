@@ -6,6 +6,7 @@
             <h1 class="text-2xl font-semibold">{{ $title }}</h1>
             <span class="text-xl mx-4">|</span>
             <div id="clock" name="clock" class="text-2xl font-semibold"></div>
+            {{-- <div id="date" name="date" class="text-2xl font-semibold"></div> --}}
         </div>
         <div class="">
             Atteend
@@ -33,26 +34,7 @@
     </div>
 
     <script>
-        function formattedTime() {
-            var date = new Date();
-
-            var formattedDate = ('0' + date.getHours()).slice(-2) + ':' +
-                ('0' + date.getMinutes()).slice(-2) + ':' +
-                ('0' + date.getSeconds()).slice(-2) + ' ' +
-                ('0' + date.getDate()).slice(-2) + '-' + 
-                ('0' + (date.getMonth() + 1)).slice(-2) + '-' +
-                (date.getFullYear());
-
-            return formattedDate;
-        }
-
-        function updateClock() {
-            var currentTime = formattedTime();
-            document.getElementById('clock').textContent = currentTime;
-        }
-
-        updateClock();
-        setInterval(updateClock, 1000);
+        
 
         $(document).ready(function () {
             if (navigator.geolocation) {
